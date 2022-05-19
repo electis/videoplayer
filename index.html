@@ -5,18 +5,18 @@
     <title>Video</title>
 </head>
 <body>
-    {% if not dirs %}
-        <a href="/"><- Назад</a><br>
-    {% endif %}
-    {% for dir in dirs %}
-        <a href="/{{ dir }}">{{ dir }}</a><br>
-    {% endfor %}
-    {% for file in files %}
-        <video width="320" height="240" controls>
-            <source src="/static/{{ name }}/{{ file }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <p>{{ file }}</p>
-    {% endfor %}
+{% if not dirs %}
+    <a href="/"><- Назад</a><br>
+{% endif %}
+{% for dir in dirs %}
+    <a href="/{{ dir }}">{{ dir }}</a><br>
+{% endfor %}
+{% for file in files %}
+    <p>{{ file }}</p>
+    <video width="320" height="240" controls>
+        <source src="/static/{{ name }}/{{ file }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+{% endfor %}
 </body>
 </html>
