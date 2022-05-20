@@ -1,21 +1,17 @@
-from glob import glob
 from os import listdir
 from os.path import isdir, join, isfile
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 root = "/storage/download/learn/"
 
 app = FastAPI()
-#app.mount("/static", StaticFiles(directory=root))
 templates = Jinja2Templates(directory=".")
 
 
 def get_content(path):
-    # files = glob(join(path, "*.mp4"))
     files = [f for f in listdir(path) if isfile(join(path, f)) and f.endswith('.mp4')]
     dirs = [f for f in listdir(path) if isdir(join(path, f))]
     return dirs, files
