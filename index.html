@@ -29,6 +29,10 @@
 {% endfor %}
 {% for file in files %}
     <p>{{ file }}</p>
+    <audio controls>
+      <source src="/learn/{{ name }}/{{ file }}" type="audio/mp4">
+      <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ file }}">ссылка на файл</a></p>
+    </audio>
     <video height="460" controls>
         <source src="/learn/{{ name }}/{{ file }}" type="video/mp4">
         Your browser does not support the video tag.
