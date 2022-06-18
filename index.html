@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Video</title>
-
     <style>
         p {
             font-size: 30pt;
@@ -12,12 +11,10 @@
         .btn {
             font-size: 40pt;
             background-color: #464646;
-
         }
         .btn a {
             color: #dadada;
         }
-
     </style>
 </head>
 <body>
@@ -46,9 +43,9 @@
         </video>
         <hr>
     {% else %}
-        <p>
+        <button class="btn">
             <a href="{{ file }}" target="_blank">{{ text }}</a>
-        </p>
+        </button>
     {% endif %}
 {% endfor %}
 </body>

@@ -18,7 +18,7 @@ def get_content(path):
             if file.endswith('.mp4'):
                 files.append((file[:-4], file))
             elif file.endswith('.url'):
-                with open(join(path, file)) as f:
+                with open(join(path, file), encoding="utf-8-sig") as f:
                     url = f.readline()
                 files.append((file[:-4], url))
     files = sorted(files)
