@@ -32,18 +32,22 @@
 {% for dir in dirs %}
     <p><a href="/{{ dir }}">{{ dir }}</a></p>
 {% endfor %}
-{% for file in files %}
-    <p>{{ file }}</p>
-    <audio controls preload="none">
-      <source src="/learn/{{ name }}/{{ file }}" type="audio/mp4">
-      <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ file }}">ссылка на файл</a></p>
-    </audio>
-    <br>
-    <video height="460" controls preload="none">
-        <source src="/learn/{{ name }}/{{ file }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <hr>
+{% for text, file in files %}
+    {% if file.endswith('.mp4') %}
+        <p>{{ text }}</p>
+        <audio controls preload="none">
+          <source src="/learn/{{ name }}/{{ file }}" type="audio/mp4">
+          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ file }}">ссылка на файл</a></p>
+        </audio>
+        <br>
+        <video height="460" controls preload="none">
+            <source src="/learn/{{ name }}/{{ file }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <hr>
+    {% else %}
+        <a href="{{ file }}">{{ text }}</a>
+    {% endif %}
 {% endfor %}
 </body>
 </html>

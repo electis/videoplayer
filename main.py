@@ -12,7 +12,16 @@ templates = Jinja2Templates(directory=".")
 
 
 def get_content(path):
-    files = sorted([f for f in listdir(path) if isfile(join(path, f)) and f.endswith('.mp4')])
+    files = []
+    for file in listdir(path):
+        if isfile(join(path, file)):
+            if file.endswith('.mp4'):
+                files.append((file[:-4], file))
+            elif file.endswith('.url'):
+                with open(file) as f:
+                    url = f.readline()
+                files.append((file[:-4], url))
+    # files = sorted([f for f in listdir(path) if isfile(join(path, f)) and f.endswith('.mp4')])
     dirs = sorted([f for f in listdir(path) if isdir(join(path, f))])
     return dirs, files
 
