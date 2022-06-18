@@ -21,6 +21,7 @@ def get_content(path):
                 with open(join(path, file)) as f:
                     url = f.readline()
                 files.append((file[:-4], url))
+    files = sorted(files)
     # files = sorted([f for f in listdir(path) if isfile(join(path, f)) and f.endswith('.mp4')])
     dirs = sorted([f for f in listdir(path) if isdir(join(path, f))])
     return dirs, files

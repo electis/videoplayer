@@ -46,7 +46,9 @@
         </video>
         <hr>
     {% else %}
-        <a href="{{ file }}">{{ text }}</a>
+        <p>
+            <a href="{{ file }}" target="_blank">{{ text }}</a>
+        </p>
     {% endif %}
 {% endfor %}
 </body>
