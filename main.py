@@ -16,7 +16,7 @@ def get_content(path):
     for filename in listdir(path):
         if isfile(join(path, filename)):
             content = filename
-            if filename.endswith('.url')
+            if filename.endswith('.url'):
                 with open(join(path, filename), encoding="utf-8-sig") as f:
                     content = f.readline()
             elif filename.endswith('.txt'):
