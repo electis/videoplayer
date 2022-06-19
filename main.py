@@ -16,9 +16,12 @@ def get_content(path):
     for filename in listdir(path):
         if isfile(join(path, filename)):
             content = filename
-            if filename.endswith('.url') or filename.endswith('.txt'):
+            if filename.endswith('.url')
                 with open(join(path, filename), encoding="utf-8-sig") as f:
                     content = f.readline()
+            elif filename.endswith('.txt'):
+                with open(join(path, filename), encoding="utf-8-sig") as f:
+                    content = f.read()
             files.append((filename, content))
     files = sorted(files)
     dirs = sorted([f for f in listdir(path) if isdir(join(path, f))])
