@@ -71,7 +71,6 @@
         <video height="460" controls preload="none">
             <source src="/learn/{{ name }}/{{ filename }}" type="video/mp4">Your browser does not support the video tag.
         </video>
-        <hr>
     {% elif filename.endswith('.url') %}
         <button class="btn">
             <a href="{{ content }}" target="_blank">{{ filename }}</a>
@@ -83,10 +82,9 @@
             <pre>{{ content }}</pre>
         </div>
     {% else %}
-        <p>{{ filename }}</p>
-        <a href="/learn/{{ name }}/{{ filename }}" target="_blank">ссылка на файл</a>
-        <br>
+        <p><a href="/learn/{{ name }}/{{ filename }}" target="_blank">ссылка на файл</a></p>
     {% endif %}
+    <hr>
 {% endfor %}
 </body>
 </html>
