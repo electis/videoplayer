@@ -55,13 +55,9 @@
     </style>
 </head>
 <body>
-{% if dirs %}
-    <p><a href="https://www.youtube.com/channel/UCFzTvuOYvlDiksYJtnDjJQA">YouTube канал</a></p>
-    <p><a href="https://vk.com/alexnataliiariver">VK группа</a></p>
-    <p><a href="https://t.me/AlexNataliiaRiver">Telegram канал</a></p>
-{% endif %}
 {% if not dirs %}
     <button class="btn"><a href="/"><- Назад</a></button>
+    <br>
 {% endif %}
 {% for dir in dirs %}
     <p><a href="/{{ dir }}">{{ dir }}</a></p>
