@@ -45,7 +45,10 @@ async def subdir(request: Request, name: str):
     if name == 'favicon.ico':
         return FileResponse(f'{root}favicon.ico')
     path = name.split('@')
-    dirs, files = get_content(join(root, *path))
+    try:
+        dirs, files = get_content(join(root, *path))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Wrong url")
     prev = '/' + '@'.join(path[:-1])
     if request.base_url.hostname == only_files:
         dirs = []
