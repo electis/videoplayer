@@ -1,12 +1,13 @@
 from os import listdir
 from os.path import isdir, join, isfile
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from starlette.responses import FileResponse
 
 root = "/storage/download/learn/"
+only_files = 'l.electis.ru'
 
 app = FastAPI()
 templates = Jinja2Templates(directory=".")
@@ -33,6 +34,8 @@ def get_content(path):
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
+    if request.base_url.hostname == only_files:
+        raise HTTPException(status_code=404, detail="Wrong url")
     dirs, files = get_content(root)
     return templates.TemplateResponse("index.html", {"request": request, "files": files, "dirs": dirs})
 
@@ -44,6 +47,9 @@ async def subdir(request: Request, name: str):
     path = name.split('@')
     dirs, files = get_content(join(root, *path))
     prev = '/' + '@'.join(path[:-1])
+    if request.base_url.hostname == only_files:
+        dirs = []
+        prev = None
     return templates.TemplateResponse("dir.html", {
         "request": request,
         "files": files,
