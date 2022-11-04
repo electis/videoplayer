@@ -1,0 +1,26 @@
+{% for filename, content in files %}
+    {% if filename.endswith('.mp4') %}
+        <p>{{ filename }}</p>
+        <audio controls preload="none">
+          <source src="/learn/{{ path }}/{{ filename }}" type="audio/mp4">
+          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ filename }}">ссылка на файл</a></p>
+        </audio>
+        <br>
+        <video height="460" controls preload="none">
+            <source src="/learn/{{ path }}/{{ filename }}" type="video/mp4">Your browser does not support the video tag.
+        </video>
+    {% elif filename.endswith('.url') %}
+        <button class="btn">
+            <a href="{{ content }}" target="_blank">{{ filename }}</a>
+        </button>
+        <br>
+    {% elif filename.endswith('.txt') %}
+        <button class="accordion btn">{{ filename}}</button>
+        <div class="panel">
+            <pre>{{ content }}</pre>
+        </div>
+    {% else %}
+        <p><a href="/learn/{{ path }}/{{ filename }}" target="_blank">{{ filename }}</a></p>
+    {% endif %}
+    <hr>
+{% endfor %}

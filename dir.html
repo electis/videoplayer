@@ -1,0 +1,11 @@
+{% include 'header.html' %}
+
+    <button class="btn"><a href="{{ prev }}"><- Назад</a></button>
+    <br>
+
+{% for dir in dirs %}
+    <p><a href="/{{ name }}@{{ dir }}">{{ dir }}</a></p>
+{% endfor %}
+
+{% include 'files.html' %}
+{% include 'footer.html' %}

@@ -4,6 +4,7 @@ from os.path import isdir, join, isfile
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from starlette.responses import FileResponse
 
 root = "/storage/download/learn/"
 
@@ -22,6 +23,8 @@ def get_content(path):
             elif filename.endswith('.txt'):
                 with open(join(path, filename), encoding="utf-8-sig") as f:
                     content = f.read()
+            elif filename.endswith('.ico'):
+                continue
             files.append((filename, content))
     files = sorted(files)
     dirs = sorted([f for f in listdir(path) if isdir(join(path, f))])
@@ -36,5 +39,16 @@ async def index(request: Request):
 
 @app.get("/{name}", response_class=HTMLResponse)
 async def subdir(request: Request, name: str):
-    dirs, files = get_content(join(root, name))
-    return templates.TemplateResponse("index.html", {"request": request, "files": files, "dirs": [], "name": name})
+    if name == 'favicon.ico':
+        return FileResponse(f'{root}favicon.ico')
+    path = name.split('@')
+    dirs, files = get_content(join(root, *path))
+    prev = '/' + '@'.join(path[:-1])
+    return templates.TemplateResponse("dir.html", {
+        "request": request,
+        "files": files,
+        "dirs": dirs,
+        "name": name,
+        "prev": prev,
+        "path": '/'.join(path),
+    })
