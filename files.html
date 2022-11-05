@@ -12,7 +12,7 @@
         <button>Идёт создание аудиофайла...</button>
 
       {% else %}
-        <form action="/{{ name }}@{{ filename }}" method="post">
+        <form action="/{{ name }}{{ filename }}" method="post">
             <button>Создать аудиофайл (После нажатия подождите несколько минут)</button>
         </form>
       {% endif %}
