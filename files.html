@@ -7,11 +7,13 @@
           <source src="/learn/{{ path }}{{ content }}" type="audio/mpeg">
           <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ content }}">ссылка на файл</a></p>
         </audio>
+
       {% elif converting %}
         <button>Идёт создание аудиофайла...</button>
+
       {% else %}
         <form action="/{{ name }}@{{ filename }}" method="post">
-            <button>Создать аудиофайл (Подождите пару минут, после нажатия)</button>
+            <button>Создать аудиофайл (После нажатия подождите несколько минут)</button>
         </form>
       {% endif %}
 

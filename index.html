@@ -1,8 +1,6 @@
 {% include 'header.html' %}
 
-{% for dir in dirs %}
-    <p><a href="/{{ dir }}">{{ dir }}</a></p>
-{% endfor %}
-
+{% include 'dirs.html' %}
 {% include 'files.html' %}
+
 {% include 'footer.html' %}
