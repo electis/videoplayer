@@ -1,26 +1,35 @@
 {% for filename, content in files %}
     {% if filename.endswith('.mp4') %}
         <p>{{ filename }}</p>
+
+      {% if content %}
         <audio controls preload="none">
-          <source src="/learn/{{ path }}/{{ filename }}" type="audio/mp4">
-          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ filename }}">ссылка на файл</a></p>
+          <source src="/learn/{{ path }}{{ content }}" type="audio/mpeg">
+          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ content }}">ссылка на файл</a></p>
         </audio>
+      {% elif converting %}
+        <button>Идёт создание аудиофайла...</button>
+      {% else %}
+        <form action="/{{ name }}@{{ filename }}" method="post">
+            <button>Создать аудиофайл (Подождите пару минут, после нажатия)</button>
+        </form>
+      {% endif %}
+
         <br>
         <video height="460" controls preload="none">
-            <source src="/learn/{{ path }}/{{ filename }}" type="video/mp4">Your browser does not support the video tag.
+            <source src="/learn/{{ path }}{{ filename }}" type="video/mp4">Your browser does not support the video tag.
         </video>
     {% elif filename.endswith('.url') %}
-        <button class="btn">
+        <p><button class="btn">
             <a href="{{ content }}" target="_blank">{{ filename }}</a>
-        </button>
-        <br>
+        </button></p>
     {% elif filename.endswith('.txt') %}
-        <button class="accordion btn">{{ filename}}</button>
+        <button class="accordion btn">▼ {{ filename}} ▼</button>
         <div class="panel">
             <pre>{{ content }}</pre>
         </div>
     {% else %}
-        <p><a href="/learn/{{ path }}/{{ filename }}" target="_blank">{{ filename }}</a></p>
+        <p><a href="/learn/{{ path }}{{ filename }}" target="_blank">{{ filename }}</a></p>
     {% endif %}
     <hr>
 {% endfor %}

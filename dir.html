@@ -2,11 +2,11 @@
 
 {% if prev %}
     <button class="btn"><a href="{{ prev }}"><- Назад</a></button>
-    <br>
+    <hr>
 {% endif %}
 
 {% for dir in dirs %}
-    <p><a href="/{{ name }}@{{ dir }}">{{ dir }}</a></p>
+    <p><a href="/{{ name }}{{ dir }}">{{ dir }}</a></p>
 {% endfor %}
 
 {% include 'files.html' %}
