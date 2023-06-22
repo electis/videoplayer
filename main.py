@@ -7,12 +7,7 @@ from fastapi.templating import Jinja2Templates
 from starlette.responses import FileResponse, RedirectResponse
 from moviepy.editor import AudioFileClip
 
-DEBUG = 0
-
-audio_ext = '.mp3'
-root = "/storage/download/learn/"
-only_files = 'l.electis.ru'
-converting_flag = 'converting.tmp'
+from settings import *
 
 app = FastAPI()
 templates = Jinja2Templates(directory=".")
@@ -23,6 +18,8 @@ def get_content(path):
     filenames = {f for f in listdir(path) if isfile(join(path, f))}
 
     for filename in filenames:
+        if filename.endswith('.ico') or filename.endswith(bak_ext):
+            continue
         content = filename
         if filename.endswith('.url'):
             with open(join(path, filename), encoding="utf-8-sig") as f:
@@ -30,8 +27,6 @@ def get_content(path):
         elif filename.endswith('.txt'):
             with open(join(path, filename), encoding="utf-8-sig") as f:
                 content = f.read()
-        elif filename.endswith('.ico'):
-            continue
         elif filename.endswith('.mp4'):
             audio = f"{filename}{audio_ext}"
             content = audio if audio in filenames else False
@@ -40,6 +35,7 @@ def get_content(path):
                 continue
         files.append((filename, content))
 
+    # https://github.com/SethMMorton/natsort
     files = sorted(files)
     dirs = sorted([f for f in listdir(path) if isdir(join(path, f))])
     return dirs, files

@@ -5,7 +5,8 @@
       {% if content %}
         <audio controls preload="none">
           <source src="/learn/{{ path }}{{ content }}" type="audio/mpeg">
-          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="/learn/{{ name }}/{{ content }}">ссылка на файл</a></p>
+          <p>Ваш браузер не поддерживает HTML5 аудио. Вот взамен
+              <a href="/learn/{{ name }}/{{ content }}">ссылка на файл</a></p>
         </audio>
 
       {% elif converting %}
@@ -19,7 +20,8 @@
 
         <br>
         <video height="460" controls preload="none">
-            <source src="/learn/{{ path }}{{ filename }}" type="video/mp4">Your browser does not support the video tag.
+            <source src="/learn/{{ path }}{{ filename }}" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     {% elif filename.endswith('.url') %}
         <p><button class="btn">
