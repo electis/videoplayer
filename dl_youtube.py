@@ -16,7 +16,7 @@ def download():
             continue
         print(cur_path)
         ydl_opts = {
-            'format': f'best[height<720]+best[ext={settings.video_ext[1:]}],bestaudio[ext={settings.audio_ext}]',
+            'format': f'best[height<720]+best[ext={settings.video_ext[1:]}],bestaudio[ext={settings.audio_ext[1:]}]',
             'outtmpl': cur_path.with_suffix('.%(ext)s').as_posix()
         }
         with YoutubeDL(ydl_opts) as ydl:
