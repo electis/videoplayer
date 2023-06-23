@@ -7,14 +7,6 @@ import utils
 
 
 def download():
-    ydl_opts = {
-        'format': 'best[height<=480]+best[ext=mp4]+bestaudio',
-        'keepvideo': True,
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-        }]
-    }
     root_path = Path(settings.root)
     for cur_path in root_path.rglob("*"):
         if cur_path.is_dir() or not cur_path.suffix == '.url':
@@ -23,7 +15,10 @@ def download():
         if not utils.youtube_get_id(url):
             continue
         print(cur_path)
-        ydl_opts['outtmpl'] = str(cur_path.with_suffix('.mp4'))
+        ydl_opts = {
+            'format': f'best[height<720]+best[ext={settings.video_ext}],bestaudio[ext={settings.audio_ext}]',
+            'outtmpl': cur_path.with_suffix('.%(ext)s').as_posix()
+        }
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
         cur_path.rename(cur_path.with_suffix(settings.bak_ext))

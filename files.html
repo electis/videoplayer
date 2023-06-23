@@ -1,5 +1,5 @@
 {% for filename, content in files %}
-    {% if filename.endswith('.mp4') %}
+    {% if filename.endswith(video_ext) %}
         <p>{{ filename }}</p>
 
       {% if content %}
