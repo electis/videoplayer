@@ -11,6 +11,7 @@ from starlette.responses import FileResponse, RedirectResponse
 from moviepy.editor import AudioFileClip
 from uvicorn import run
 
+import settings
 from settings import *
 
 app = FastAPI()
@@ -28,7 +29,7 @@ def get_content(path):
         content = filename.name
         if filename.suffix == '.url':
             content = filename.read_text("utf-8-sig")
-        elif filename.suffix == '.txt':
+        elif filename.suffix in ('.txt', settings.bak_ext):
             content = filename.read_text("utf-8-sig")
         elif filename.suffix == video_ext:
             audio = filename.with_suffix(audio_ext)

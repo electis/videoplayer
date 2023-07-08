@@ -35,8 +35,8 @@ def main():
 
         if utils.youtube_get_id(url):
             download(cur_path, url)
-        elif 'youtube.com/playlist' in url:
-            download(cur_path, url, playlist=True)
+        # elif 'youtube.com/playlist' in url:
+        #     download(cur_path, url, playlist=True)
 
 
 if __name__ == "__main__":
